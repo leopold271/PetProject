@@ -11,20 +11,13 @@ import PomodoroTimer from './components/pomodoroTimer/pomodoroTimer';
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Navbar />
-        <Route path='/todos'>
-          <TodosList />
-        </Route>
-        <Route path='/weather'>
-          <Weather />
-        </Route>
-        <Route path='/pomodoro-timer'>
-          <PomodoroTimer />
-        </Route>
-      </div>
-    </Router>
+
+    <div>
+      <TodosList />
+      <Weather />
+      <PomodoroTimer />
+    </div>
+
   );
 }
 

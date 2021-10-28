@@ -1,8 +1,13 @@
-import React from "react"
+import React, {FC} from "react";
+import { IWeatherInfo } from '../weatherslice'
 
-const WeatherCard = () => {
+interface Iprops {
+    day: IWeatherInfo
+}
+
+const WeatherCard: FC<Iprops>  = ({day}) => {
     return (
-        <div>1 card</div>
+        <div>{day.main.temp}</div>
     )
 }
 

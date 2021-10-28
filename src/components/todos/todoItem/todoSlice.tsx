@@ -1,7 +1,6 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
-
-interface TodoItems {
+export interface TodoItems {
     id: string, todoText: string
 }
 
@@ -11,10 +10,16 @@ interface TodosState {
 
 const initialState: TodosState = {
     TodoItems: [
-        { id: '1', todoText: 'sometext' },
-        { id: '2', todoText: 'sometext' },
-        { id: '3', todoText: 'sometext' }
+
     ]
+}
+
+interface IEditAction {
+    type: string,
+    payload: {
+        id: string,
+        content: string
+    }
 }
 
 const TodoReducer = createSlice({
@@ -27,10 +32,22 @@ const TodoReducer = createSlice({
                 todoText: action.payload
             }
             state.TodoItems.push(newTodo);
+        },
+        deleteTodo: (state, action) => {
+            state.TodoItems = state.TodoItems.filter((todoObj) => {
+                return todoObj.id !== action.payload
+            })
+        },
+        editTodo: (state, action: IEditAction) => {
+           const {id, content} = action.payload 
+           const todoToEdit = state.TodoItems.find(todo => todo.id === id);
+           if(todoToEdit) {
+               todoToEdit.todoText = content
+           }
         }
     }
 });
 
-export const { addTodo } = TodoReducer.actions;
+export const { addTodo, deleteTodo, editTodo } = TodoReducer.actions;
 
 export default TodoReducer.reducer;
