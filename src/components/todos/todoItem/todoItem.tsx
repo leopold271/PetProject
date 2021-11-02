@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import classes from './todoItem.module.css';
 import { deleteTodo, editTodo, moveToDone } from './todoSlice';
 import { useAppSelector, useAppDispatch } from '../../../appHooks';
 
-interface todoItemProps {
+interface ITodoItemProps {
     text: string,
     id: string,
 }
 
-const TodoItem = (props: todoItemProps) => {
+const TodoItem: FC<ITodoItemProps> = (props) => {
 
     const {id, text} = props;
 
@@ -25,7 +25,7 @@ const TodoItem = (props: todoItemProps) => {
     return (
         <div className={classes.todoItem}>
             <div>
-                <input type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
+                <input className={classes.todoItem_checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
                 <p>{props.text}</p>
                 <button onClick={() => dispatch(deleteTodo(props.id))} >
                     <img src='/close.png' width='20px' height='20px' alt='delete' />

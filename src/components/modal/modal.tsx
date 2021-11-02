@@ -15,9 +15,8 @@ const Modal: FC<IProps> = ({ children, open, onClose }) => {
     if (!open) return null
     return ReactDom.createPortal(
         <>
-            <div className={classes.overlay}></div>
+            <div className={classes.overlay} onClick={onClose}></div>
             <div className={classes.modal}>
-                <button onClick={onClose} >close</button>
                 {children}
             </div>
         </>

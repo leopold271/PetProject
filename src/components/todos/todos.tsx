@@ -34,8 +34,11 @@ const TodosList = () => {
         <div className={classes.todos}>
             <div>
                 <h1>Todos</h1>
-                <input type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}/>
-                <button onClick={handleClick}>addTodo</button>
+                <input className={classes.todos_input} type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)}/>
+                <button className={classes.todos_addButton} onClick={handleClick} >
+                    <img src="icons8Add.png" alt="add" width='20px'/>
+                </button>
+                
             </div>
             <div className={classes.renderedTodos}>
                 {renderedTodos}

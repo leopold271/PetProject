@@ -1,9 +1,17 @@
-.todos{
+.todos {
     width: 500px;
     margin: auto;
     text-align: center;
 }
 
-.renderedTodos{
+.renderedTodos {
     border-bottom: 1px solid black;
+}
+
+.todos_input {
+    padding: 6px;
+}
+
+.todos_addButton {
+    margin-left: 4px;
 }

@@ -20,9 +20,10 @@ const PomodoroTimer = () => {
                     let minutes = isBreakTime ? 24 : 4;
                     let seconds = 59
 
-                    setSeconds(seconds)
-                    setMinutes(minutes)
-                    setIsBreakTime(!isBreakTime)
+                    setSeconds(seconds);
+                    setMinutes(minutes);
+                    setIsBreakTime(!isBreakTime);
+                    setModalIsShown(!modalIsShown);
                 }
             } else {
                 setSeconds(seconds - 1)
@@ -35,26 +36,27 @@ const PomodoroTimer = () => {
 
     return (
         <div className={classes.pomodoro}>
-            <div className={classes.pomodoro_modal}>
-                <>
-                    <div>
-                        {/* <button onClick={() => setModalIsShown(true)}>open modal</button> */}
-                        {isBreakTime ? 
-                        <Modal open={modalIsShown} onClose={() => setModalIsShown(false)}>
-                            Break time! New session starts in: {timerMinutes}:{timerSeconds}
-                        </Modal>
-                        : 
-                        <Modal open={modalIsShown} onClose={() => setModalIsShown(false)} >
-                            Time to get to work! Next rest will be after {timerMinutes}:{timerSeconds}
-                        </Modal>
-                        }
-                        
-                    </div>
-                </>
-                {/* {displayMessage && <div>Break time! New session starts in:</div>} */}
+            <div>
+                {isBreakTime ?
+                    <Modal open={modalIsShown} onClose={() => setModalIsShown(false)}>
+                        <div className={classes.breakTimer}> 
+                            <h3 className={classes.breakTimer_header}>Break time! New session starts in: </h3>
+                            <p className={classes.breakTimer_timer}>{timerMinutes}:{timerSeconds}</p>
+                        </div>
+                    </Modal>
+                    :
+                    <Modal open={modalIsShown} onClose={() => setModalIsShown(false)} >
+                        <h3 className={classes.breakTimer_header}>Time to get to work! Next rest will be after </h3>
+                        <p className={classes.breakTimer_timer}>{timerMinutes}:{timerSeconds}</p>
+                    </Modal>
+                }
+
             </div>
-            <div className="timer">
+            <div className={classes.mainTimer}>
+                <img src="pomodoroTimer.png" width='150px'  alt="pomodoro.png" />
+                <div className={classes.mainTimer_timer}>
                 {timerMinutes}:{timerSeconds}
+                </div>
             </div>
         </div>
     )
