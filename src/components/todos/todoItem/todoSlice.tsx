@@ -1,25 +1,10 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
+import { TodosState, IEditAction, ImoveToDoneAction, IdeleteTodoAction } from './todoInterfaces'
 
-export interface TodoItems {
-    id: string, todoText: string
-}
-
-interface TodosState {
-    TodoItems: TodoItems[]
-}
 
 const initialState: TodosState = {
-    TodoItems: [
-
-    ]
-}
-
-interface IEditAction {
-    type: string,
-    payload: {
-        id: string,
-        content: string
-    }
+    TodoItems: [],
+    DoneTodoItems: []
 }
 
 const TodoReducer = createSlice({
@@ -33,21 +18,31 @@ const TodoReducer = createSlice({
             }
             state.TodoItems.push(newTodo);
         },
-        deleteTodo: (state, action) => {
+        deleteTodo: (state, action: IdeleteTodoAction) => {
             state.TodoItems = state.TodoItems.filter((todoObj) => {
                 return todoObj.id !== action.payload
             })
         },
         editTodo: (state, action: IEditAction) => {
-           const {id, content} = action.payload 
+           const {id, editedTodoText} = action.payload 
            const todoToEdit = state.TodoItems.find(todo => todo.id === id);
            if(todoToEdit) {
-               todoToEdit.todoText = content
+               todoToEdit.todoText = editedTodoText
            }
+        },
+        moveToDone: (state, action: ImoveToDoneAction) => {
+            const doneTodo = state.TodoItems.find(todo => todo.id === action.payload);
+            state.TodoItems = state.TodoItems.filter(todo => todo.id !== action.payload)
+            if(doneTodo) {
+                state.DoneTodoItems.push(doneTodo);
+            }
+        },
+        clearAllDoneTodos: (state) => {
+            state.DoneTodoItems = []
         }
     }
 });
 
-export const { addTodo, deleteTodo, editTodo } = TodoReducer.actions;
+export const { addTodo, deleteTodo, editTodo, moveToDone, clearAllDoneTodos } = TodoReducer.actions;
 
 export default TodoReducer.reducer;

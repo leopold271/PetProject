@@ -1,0 +1,14 @@
+.weatherCard {
+    border: 1px solid black;
+    background-color: rgba(0, 0, 255, 0.123);
+}
+
+.weatherCard p {
+    display: block;
+    text-align: center;
+}
+
+.weatherCard img {
+    width: 30px;
+    height: 30px;
+}

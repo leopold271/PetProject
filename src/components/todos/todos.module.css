@@ -1,0 +1,9 @@
+.todos{
+    width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.renderedTodos{
+    border-bottom: 1px solid black;
+}

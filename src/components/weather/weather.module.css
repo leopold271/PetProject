@@ -1,0 +1,37 @@
+
+.weatherCards {
+    width: 250px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    transition: margin 2s;
+    margin-right: -250px;
+}
+
+.weatherCards_content{
+    position: relative;
+    width: 250px;
+    height: 100%;
+}
+
+.weatherCards_menuButton{
+    position: absolute;
+    top: 0;
+    left: -46px
+}
+
+.weatherCards_menuButtonImg {
+    width: 30px;
+    height: 30px;
+}
+
+.weatherCards__visible{
+    margin-right: 0;
+}
+
+
+

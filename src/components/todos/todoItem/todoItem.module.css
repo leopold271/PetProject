@@ -1,3 +1,11 @@
 .todoItem input, p{
     display: inline-block;
 }
+
+.todoItem_editFrom__active{
+    display: block;
+}
+
+.todoItem_editFrom__hidden{
+    display: none;
+}
