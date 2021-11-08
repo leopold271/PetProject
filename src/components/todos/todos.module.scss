@@ -1,0 +1,69 @@
+@import '../../mixins.scss';
+.todos {
+    display: flex;
+    flex-direction: column;
+}
+
+.todos__content {
+    width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todos__header {
+    text-align: center;
+}
+
+.todos__enterings {
+    display: flex;
+    justify-content: center;
+}
+
+.todos__input {
+    padding: 5px 10px;
+    border-radius: 10px;
+    &:hover {
+        background-color: rgba(0, 128, 0, 0.212);
+    }
+    &:focus {
+        box-shadow: 6px 8px 61px 0px rgba(0, 128, 0, 0.212) inset;
+        outline: none;
+    }
+}
+
+.todos__addButton {
+    border: none;
+    padding: 7px;
+    background-color: rgba(0, 128, 0, 0.356);
+    cursor: pointer;
+    margin-left: 3px;
+    border-radius: 10px;
+    &:hover {
+        background-color: rgba(0, 128, 0, 0.5);
+    }
+}
+
+.renderedTodos {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.renderedDoneTodos {
+    position: relative;
+    width: 900px;
+    margin: 0 auto;
+}
+
+.renderedDoneTodos__clearButton {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    @include smallBtn
+}
+
+.renderedDoneTodos__clearButton_active {
+    display: inline-block;
+}

@@ -1,4 +1,3 @@
-
 .weatherCards {
     width: 250px;
     height: 100%;
@@ -12,26 +11,27 @@
     margin-right: -250px;
 }
 
-.weatherCards_content{
+.weatherCards__content {
     position: relative;
     width: 250px;
     height: 100%;
 }
 
-.weatherCards_menuButton{
+.weatherCards__menuButton {
     position: absolute;
     top: 0;
-    left: -46px
+    left: -46px;
+    background-color: rgba(0, 0, 255, 0.178);
+    &:hover {
+        background-color: rgba(0, 0, 255, 0.301);
+    }
 }
 
-.weatherCards_menuButtonImg {
+.weatherCards__menuButtonImg {
     width: 30px;
     height: 30px;
 }
 
-.weatherCards__visible{
+.weatherCards_visible {
     margin-right: 0;
 }
-
-
-

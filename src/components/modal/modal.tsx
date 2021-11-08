@@ -1,11 +1,11 @@
 import React, { useEffect, FC } from "react";
 import ReactDom from 'react-dom';
-import classes from './modal.module.css'
+import classes from './modal.module.scss'
 
 interface IProps {
     children: React.ReactNode,
     open: boolean,
-    onClose: () => void
+    onClose?: () => void
 }
 
 const Modal: FC<IProps> = ({ children, open, onClose }) => {
@@ -15,10 +15,8 @@ const Modal: FC<IProps> = ({ children, open, onClose }) => {
     if (!open) return null
     return ReactDom.createPortal(
         <>
-            <div className={classes.overlay} onClick={onClose}></div>
-            <div className={classes.modal}>
+            <div className={classes.modal__overlay} onClick={onClose}></div>
                 {children}
-            </div>
         </>
         , rootEl
     )

@@ -1,52 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import classes from './profile.module.css'
-
-interface IValues {
-    firstName: string,
-    lastName: string,
-    email: string,
-    nickName: string
-}
-
-interface IErrors {
-    firstName?: string,
-    lastName?: string,
-    email?: string,
-    nickName?: string
-}
-
-
-const validate = (values: IValues) => {
-    const errors: IErrors = {};
-
-    if (!values.firstName) {
-        errors.firstName = 'Required';
-    } else if (values.firstName.length > 15) {
-        errors.firstName = 'Must be 15 characters or less'
-    }
-
-    if (!values.lastName) {
-        errors.lastName = 'Required';
-    } else if (values.lastName.length > 20) {
-        errors.lastName = 'Must be 20 characters or less';
-    }
-
-    if (!values.email) {
-        errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
-    }
-
-    if (!values.nickName) {
-        errors.nickName = 'Required';
-    }
-
-    return errors;
-}
-
+import classes from './profile.module.scss'
+import Modal from '../modal/modal';
+import * as Yup from 'yup';
+import _ from 'lodash';
 
 const Profile = () => {
+
+    const [modalIsShown, setModalIsShown] = useState(false);
+    const [editMode, setEditMode] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -55,32 +17,64 @@ const Profile = () => {
             email: '',
             nickName: ''
         },
-        validate,
+        validationSchema: Yup.object({
+            firstName: Yup.string()
+                .max(15, 'Must be 15 characters or less')
+                .required('Required'),
+            lastName: Yup.string()
+                .max(20, 'Must be 20 characters or less')
+                .required('Required'),
+            email: Yup.string()
+                .email('Invalid Email adress')
+                .required('Required'),
+            nickName: Yup.string()
+                .required('Required')
+        }),
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
     });
 
+    const handleSaveButtonClick = () => {
+        setModalIsShown(false);
+        localStorage.setItem('firstName', formik.values.firstName);
+        localStorage.setItem('lastName', formik.values.lastName); 
+        localStorage.setItem('email', formik.values.email); 
+        localStorage.setItem('nickName', formik.values.nickName);  
+    }
+   
 
     return (
-        <div className={classes.form}>
-            <div className={classes.form_content}>
-                <h1 className={classes.form_header}>Profile</h1>
-                <form className={classes.formForm} onSubmit={formik.handleSubmit}>
-                    <label htmlFor="firstName">First Name</label>
-                    <input type="text" id='firstName' name='firstName' onChange={formik.handleChange} value={formik.values.firstName} />
-                    {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
-                    <label htmlFor="lastName">Second Name</label>
-                    <input type="text" id='lastName' name='lastName' onChange={formik.handleChange} value={formik.values.lastName} />
-                    {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
-                    <label htmlFor="email">Email</label>
-                    <input type="email" name="email" id="email" onChange={formik.handleChange} value={formik.values.email} />
-                    {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-                    <label htmlFor="nickName">nickName</label>
-                    <input type="text" id='nickName' name='nickName' onChange={formik.handleChange} value={formik.values.nickName} />
-                    {formik.errors.nickName ? <div>{formik.errors.nickName}</div> : null}
-                    <button type='submit'> save </button>
-                </form>
+        <div>
+            <Modal open={modalIsShown} >
+                <div className={classes.form}>
+                    <div className={classes.form__content}>
+                        <h1 className={classes.form__header}>Profile</h1>
+                        <form className={classes.form__form} onSubmit={formik.handleSubmit}>
+                            <label className={classes.form__label} htmlFor="firstName">First Name</label><br />
+                            <input className={classes.form__input} type="text" id='firstName' {...formik.getFieldProps('firstName')} /><br />
+                            {formik.touched.firstName && formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
+                            <label className={classes.form__label} htmlFor="lastName">Second Name</label><br />
+                            <input className={classes.form__input} type="text" id='lastName' {...formik.getFieldProps('lastName')} /><br />
+                            {formik.touched.lastName && formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
+                            <label className={classes.form__label} htmlFor="email">Email</label><br />
+                            <input className={classes.form__input} type="email" id="email" {...formik.getFieldProps('email')} /><br />
+                            {formik.touched.email && formik.errors.email ? <div>{formik.errors.email}</div> : null}
+                            <label className={classes.form__label} htmlFor="nickName">nickName</label><br />
+                            <input className={classes.form__input} type="text" id='nickName' {...formik.getFieldProps('nickName')} /><br />
+                            {formik.touched.nickName && formik.errors.nickName ? <div>{formik.errors.nickName}</div> : null}
+                            <button className={classes.form__button} type='submit' onClick={handleSaveButtonClick} > save </button>
+                        </form>
+                    </div>
+                </div>
+            </Modal>
+
+            <div className={classes.profileInfo}>
+                <p>{localStorage.firstName}</p>
+                <p>{localStorage.lastName}</p>
+                <p>{localStorage.email}</p>
+                <p>{localStorage.nickName}</p>
+                <button className={classes.profileInfo__button} onClick={() => setModalIsShown(true)}>edit</button>
             </div>
         </div>
 

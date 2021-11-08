@@ -1,0 +1,10 @@
+.doneTodoItem {
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+}
+
+.doneTodoItems__text {
+    text-decoration-line: line-through;
+    color: rgba(0, 0, 0, 0.438);
+}

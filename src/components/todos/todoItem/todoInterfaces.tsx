@@ -22,3 +22,7 @@ export interface ImoveToDoneAction {
 export interface IdeleteTodoAction{
     payload: string
 }
+
+export interface IAddTodoAction{
+    payload: string
+}

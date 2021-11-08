@@ -1,0 +1,25 @@
+@import '../../mixins.scss';
+.sideBar {
+    margin: 0;
+    padding: 0;
+    width: 90px;
+    background-color: rgba(0, 128, 0, 0.212);
+    height: 100%;
+}
+
+.sideBar__item {
+    border: 1px solid rgba(0, 128, 0, 0.692);
+    margin-bottom: 1px;
+    text-align: left;
+}
+
+.sideBar_link {
+    display: block;
+    padding: 15px;
+    height: 100%;
+    color: black;
+    text-decoration: none;
+    &:hover {
+        @include shadow-outside;
+    }
+}

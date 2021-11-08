@@ -1,5 +1,5 @@
 import React, { useState, FC } from 'react';
-import classes from './todoItem.module.css';
+import classes from './todoItem.module.scss';
 import { deleteTodo, editTodo, moveToDone } from './todoSlice';
 import { useAppSelector, useAppDispatch } from '../../../appHooks';
 
@@ -24,18 +24,18 @@ const TodoItem: FC<ITodoItemProps> = (props) => {
 
     return (
         <div className={classes.todoItem}>
-            <div>
-                <input className={classes.todoItem_checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
-                <p>{props.text}</p>
-                <button onClick={() => dispatch(deleteTodo(props.id))} >
+            <div className={classes.todoItem__body}>
+                <input className={classes.todoItem__checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
+                <p className={classes.todoItem__text}>{props.text}</p>
+                <button className={classes.todoItem__deleteBtn} onClick={() => dispatch(deleteTodo(props.id))} >
                     <img src='/close.png' width='20px' height='20px' alt='delete' />
                 </button>
-                <button onClick={handleEditButtonClick}>
+                <button className={classes.todoItem__editBtn} onClick={handleEditButtonClick}>
                     <img src='/icons8-edit-24.png' width='20px' height='20px' alt='edit' />
                 </button>
             </div>
-            <div className={`${editMode ? classes.todoItem_editFrom__active : classes.todoItem_editFrom__hidden}`}>
-                <textarea value={editedTodoText} onChange={(e) => setEditedTodoText(e.target.value)}></textarea>
+            <div className={` ${classes.todoItem__editForm} ${editMode ? classes.todoItem__editFrom_active : ''}`}>
+                <textarea className={classes.todoItem__textarea} placeholder='edit here...' value={editedTodoText} onChange={(e) => setEditedTodoText(e.target.value)}></textarea>
             </div>
         </div>
     )

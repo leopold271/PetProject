@@ -1,4 +1,5 @@
 import React from 'react';
+import classes from './doneTodoItem.module.scss'
 
 interface IdoneTodoItemProps {
     id: string,
@@ -8,9 +9,8 @@ interface IdoneTodoItemProps {
 const DoneTodoItem = (props: IdoneTodoItemProps) => {
 
     return(
-        <div>
-            {props.text}
-            <img src="icons8-ok-24.png" width='15px' height='15px' alt="ok" />
+        <div className={classes.doneTodoItem}>
+            <p className={classes.doneTodoItems__text}>{props.text}</p>
         </div>
     )
 }

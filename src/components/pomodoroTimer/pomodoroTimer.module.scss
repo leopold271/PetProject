@@ -1,4 +1,5 @@
-.modal {
+.breakTimer {
+    text-align: center;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -13,14 +14,18 @@
     border-radius: 30px;
 }
 
-.overlay {
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .4);
+.breakTimer__timer {
+    font-size: 80px;
+    line-height: 20px;
+}
+
+.mainTimer {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.mainTimer__timer {
+    margin-left: 30px;
+    font-size: 40px;
 }

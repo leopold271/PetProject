@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import TodosList from './components/todos/todos';
 import {
   BrowserRouter as Router,
@@ -7,7 +7,7 @@ import {
 import Weather from './components/weather/weather';
 import PomodoroTimer from './components/pomodoroTimer/pomodoroTimer';
 import SideBar from './components/sideBar/sideBar';
-import Profile from './components/profile/profile';
+import EditProfile from './components/profile/profile'
 
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <PomodoroTimer />
         </Route>
         <Route path='/profile'>
-          <Profile />
+          <EditProfile />
         </Route>
       </Router>
     </main>

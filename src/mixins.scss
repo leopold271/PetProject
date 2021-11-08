@@ -1,0 +1,31 @@
+@mixin shadow-inside {
+    box-shadow: -23px 23px 37px 12px rgba(2, 15, 20, 0.123) inset;
+}
+
+@mixin shadow-outside {
+    box-shadow: 9px 9px 29px 4px rgba(106, 144, 161, 0.21);
+}
+
+@mixin smallBtn {
+    font-size: 18px;
+    appearance: none;
+    border-radius: 5px;
+    background-color: blanchedalmond;
+    padding: 4px 18px;
+    cursor: pointer;
+    &:hover {
+        @include shadow-inside;
+    }
+}
+
+@mixin iconBtn {
+    border: none;
+    padding: 3px;
+    background-color: rgba(0, 128, 0, 0.356);
+    cursor: pointer;
+    margin-left: 3px;
+    border-radius: 4px;
+    &:hover {
+        background-color: rgba(0, 128, 0, 0.5);
+    }
+}

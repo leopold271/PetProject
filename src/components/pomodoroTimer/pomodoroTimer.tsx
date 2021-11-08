@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "../modal/modal";
-import classes from './pomodoroTimer.module.css'
+import classes from './pomodoroTimer.module.scss'
 
 const PomodoroTimer = () => {
 
@@ -36,26 +36,27 @@ const PomodoroTimer = () => {
 
     return (
         <div className={classes.pomodoro}>
-            <div>
+            <div className={classes.pomodoroModals}>
                 {isBreakTime ?
                     <Modal open={modalIsShown} onClose={() => setModalIsShown(false)}>
-                        <div className={classes.breakTimer}> 
-                            <h3 className={classes.breakTimer_header}>Break time! New session starts in: </h3>
-                            <p className={classes.breakTimer_timer}>{timerMinutes}:{timerSeconds}</p>
+                        <div className={classes.breakTimer}>
+                            <h3 className={classes.breakTimer__header}>Break time! New session starts in: </h3>
+                            <p className={classes.breakTimer__timer}>{timerMinutes}:{timerSeconds}</p>
                         </div>
                     </Modal>
                     :
                     <Modal open={modalIsShown} onClose={() => setModalIsShown(false)} >
-                        <h3 className={classes.breakTimer_header}>Time to get to work! Next rest will be after </h3>
-                        <p className={classes.breakTimer_timer}>{timerMinutes}:{timerSeconds}</p>
+                        <div className={classes.breakTimer}>
+                            <h3 className={classes.breakTimer__header}>Time to get to work! Next rest will be after: </h3>
+                            <p className={classes.breakTimer__timer}>{timerMinutes}:{timerSeconds}</p>
+                        </div>
                     </Modal>
                 }
-
             </div>
             <div className={classes.mainTimer}>
-                <img src="pomodoroTimer.png" width='150px'  alt="pomodoro.png" />
-                <div className={classes.mainTimer_timer}>
-                {timerMinutes}:{timerSeconds}
+                <img className={classes.mainTimer__img} src="pomodoroTimer.png" width='150px' alt="pomodoro.png" />
+                <div className={classes.mainTimer__timer}>
+                    {timerMinutes}:{timerSeconds}
                 </div>
             </div>
         </div>

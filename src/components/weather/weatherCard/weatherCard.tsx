@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { IWeatherInfo } from '../weatherCard/weatherInterfaces';
-import classes from './weatherCard.module.css'
+import classes from './weatherCard.module.scss'
 
 interface Iprops {
     day: IWeatherInfo
