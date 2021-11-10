@@ -1,0 +1,15 @@
+.clock{
+    width: 160px;
+    height: 100px;
+    background-color: rgba(0, 128, 0, 0.315);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 1px 5px 70px 41px rgba(0, 128, 0, 0.315) inset;
+    font-size: 36px;
+}

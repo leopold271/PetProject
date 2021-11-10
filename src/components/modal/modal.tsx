@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from "react";
+import React, { FC } from "react";
 import ReactDom from 'react-dom';
 import classes from './modal.module.scss'
 

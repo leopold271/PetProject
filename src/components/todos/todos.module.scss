@@ -48,12 +48,17 @@
 .renderedTodos {
     width: 900px;
     margin: 0 auto;
+    
 }
 
 .renderedDoneTodos {
     position: relative;
     width: 900px;
     margin: 0 auto;
+}
+
+.renderedDoneTodos_withBorder {
+    border-top: 2px solid gray ;
 }
 
 .renderedDoneTodos__clearButton {

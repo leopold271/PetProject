@@ -18,7 +18,7 @@ const Weather = () => {
     const mappedWeatherCards = days.map((day, index) => <WeatherCard day={day} key={index} />)
 
     return (
-        <div className={`${classes.weatherCards} ${isShown ? classes.weatherCards_visible : ''} `}>
+        <div data-testid='weatherBox' className={`${classes.weatherCards} ${isShown ? classes.weatherCards_visible : ''} `}>
             <div className={classes.weatherCards__content}>
                 <button className={classes.weatherCards__menuButton} onClick={() => setIsShown(!isShown)}>
                     <img className={classes.weatherCards__menuButtonImg} src="./icons8-weather-50.png" alt="show weather" />

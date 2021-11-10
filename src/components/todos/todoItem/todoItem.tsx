@@ -23,10 +23,10 @@ const TodoItem: FC<ITodoItemProps> = (props) => {
     const dispatch = useAppDispatch();
 
     return (
-        <div className={classes.todoItem}>
+        <div data-testid='todoEl' className={classes.todoItem}>
             <div className={classes.todoItem__body}>
-                <input className={classes.todoItem__checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
-                <p className={classes.todoItem__text}>{props.text}</p>
+                <input data-testid='checkbox' className={classes.todoItem__checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
+                <p className={classes.todoItem__text} >{props.text}</p>
                 <button className={classes.todoItem__deleteBtn} onClick={() => dispatch(deleteTodo(props.id))} >
                     <img src='/close.png' width='20px' height='20px' alt='delete' />
                 </button>

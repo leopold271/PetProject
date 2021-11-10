@@ -1,38 +1,54 @@
 import React, { useState, useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "../../appHooks";
+import { setSeconds, setMinutes } from './pomodoroTimerSlice'
 import Modal from "../modal/modal";
 import classes from './pomodoroTimer.module.scss'
 
 const PomodoroTimer = () => {
 
-    const [minutes, setMinutes] = useState(25);
-    const [seconds, setSeconds] = useState(0);
+    // const [minutes, setMinutes] = useState(25);
+    // const [seconds, setSeconds] = useState(0);
     const [isBreakTime, setIsBreakTime] = useState(false)
     const [modalIsShown, setModalIsShown] = useState(false);
 
+    const seconds = useAppSelector((state) => state.timer.timerSeconds);
+    const timerSeconds = seconds < 10 ? `0${seconds}` : seconds 
+    const minutes = useAppSelector((state) => state.timer.timerMinutes);
+    const timerMinutes =  minutes < 10 ? `0${minutes}` : minutes;
+    const dispatch = useAppDispatch();
+
     useEffect(() => {
         let interval = setInterval(() => {
-            clearInterval(interval)
+            clearInterval(interval);
             if (seconds === 0) {
                 if (minutes !== 0) {
-                    setSeconds(59);
-                    setMinutes(minutes - 1);
-                } else {
-                    let minutes = isBreakTime ? 24 : 4;
-                    let seconds = 59
+                    // setSeconds(59);
+                    // setMinutes(minutes - 1);
+                    dispatch(setSeconds(59));
+                    dispatch(setMinutes(minutes - 1));
 
-                    setSeconds(seconds);
-                    setMinutes(minutes);
+                } else {
+                    // let minutes = isBreakTime ? 24 : 4;
+                    // let seconds = 59
+
+                    dispatch(setSeconds(59));
+                    dispatch(setMinutes(isBreakTime ? 24 : 4))
+
+                    // setSeconds(seconds);
+                    // setMinutes(minutes);
                     setIsBreakTime(!isBreakTime);
                     setModalIsShown(!modalIsShown);
                 }
             } else {
-                setSeconds(seconds - 1)
+                // setSeconds(seconds - 1)
+                dispatch(setSeconds(seconds - 1))
             }
         }, 1000)
     }, [seconds])
 
-    const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
-    const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    // const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    // const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
     return (
         <div className={classes.pomodoro}>
@@ -58,6 +74,7 @@ const PomodoroTimer = () => {
                 <div className={classes.mainTimer__timer}>
                     {timerMinutes}:{timerSeconds}
                 </div>
+                
             </div>
         </div>
     )

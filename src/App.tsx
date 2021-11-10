@@ -7,7 +7,8 @@ import {
 import Weather from './components/weather/weather';
 import PomodoroTimer from './components/pomodoroTimer/pomodoroTimer';
 import SideBar from './components/sideBar/sideBar';
-import EditProfile from './components/profile/profile'
+import EditProfile from './components/profile/profile';
+import Clock from './components/Clock/clock';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     <main className='body'>
       <Router>
         <SideBar />
+        <Clock/>
         <Route path='/home'>
           <TodosList />
           <Weather />

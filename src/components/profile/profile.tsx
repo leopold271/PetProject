@@ -8,7 +8,6 @@ import _ from 'lodash';
 const Profile = () => {
 
     const [modalIsShown, setModalIsShown] = useState(false);
-    const [editMode, setEditMode] = useState(false);
 
     const formik = useFormik({
         initialValues: {
@@ -35,14 +34,15 @@ const Profile = () => {
         },
     });
 
+
     const handleSaveButtonClick = () => {
         setModalIsShown(false);
         localStorage.setItem('firstName', formik.values.firstName);
-        localStorage.setItem('lastName', formik.values.lastName); 
-        localStorage.setItem('email', formik.values.email); 
-        localStorage.setItem('nickName', formik.values.nickName);  
+        localStorage.setItem('lastName', formik.values.lastName);
+        localStorage.setItem('email', formik.values.email);
+        localStorage.setItem('nickName', formik.values.nickName);
     }
-   
+
 
     return (
         <div>
@@ -70,11 +70,25 @@ const Profile = () => {
             </Modal>
 
             <div className={classes.profileInfo}>
-                <p>{localStorage.firstName}</p>
-                <p>{localStorage.lastName}</p>
-                <p>{localStorage.email}</p>
-                <p>{localStorage.nickName}</p>
-                <button className={classes.profileInfo__button} onClick={() => setModalIsShown(true)}>edit</button>
+                <div className={classes.profileInfo__content}>
+                    <div className={classes.profileInfo__firstName}>
+                        <span className={classes.profileInfo__label}>First name: </span>
+                        <span className={classes.profileInfo__infoItem}>{localStorage.firstName}</span>
+                    </div>
+                    <div className={classes.profileInfo__lastName}>
+                        <span className={classes.profileInfo__label}>Last name: </span>
+                        <span className={classes.profileInfo__infoItem}>{localStorage.lastName}</span>
+                    </div>
+                    <div className={classes.profileInfo__email}>
+                        <span className={classes.profileInfo__label}>Email: </span>
+                        <span className={classes.profileInfo__infoItem}>{localStorage.email}</span>
+                    </div>
+                    <div className={classes.profileInfo__nickname}>
+                        <span className={classes.profileInfo__label}>Nickname: </span>
+                        <span className={classes.profileInfo__infoItem}>{localStorage.nickName}</span>
+                    </div>
+                    <button className={classes.profileInfo__button} onClick={() => setModalIsShown(true)}>edit</button>
+                </div>
             </div>
         </div>
 
