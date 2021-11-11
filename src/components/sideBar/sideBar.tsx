@@ -7,7 +7,7 @@ const SideBar = () => {
     return (
         <div className={classes.sideBar}>
             <div className={classes.sideBar__item}>
-                <NavLink className={classes.sideBar_link} to='home'>Home</NavLink>
+                <NavLink className={classes.sideBar_link} to='/home'>Home</NavLink>
             </div>
             <div className={classes.sideBar__item}>
                 <NavLink className={classes.sideBar_link} to='/profile'>Profile</NavLink>

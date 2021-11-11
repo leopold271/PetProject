@@ -1,80 +1,137 @@
 import React, { FC, ReactElement } from 'react'
-import { getByRole, render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { getByRole, render, screen, getByText, getAllByTestId } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import TodosList from '../todos';
 import { Provider } from 'react-redux';
 import store from '../../../store';
+import { addTodo } from '../todoItem/todoSlice';
+import { die } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
+import { add } from 'lodash';
 
+// const setup = () => {
+//     const utils = render(<Provider store={store}>
+//         <TodosList />
+//     </Provider>)
+//     const addTodoInput = utils.getByPlaceholderText('write your task here...');
+//     const addTodoButton = utils.getByTestId('addTodoButton');
+//     const header = utils.getByRole('heading', { name: 'Todos' })
+    
+//     const addTodo = (todos: string[]) => {
+//         todos.forEach(todo => {
+//             userEvent.type(addTodoInput, todo);
+//             userEvent.click(addTodoButton);
+//         })
+//     }
+//     return {
+//         addTodoButton,
+//         addTodoInput,
+//         header,
+//         addTodo,
+//         ...utils
+//     }
+// }
 
-test('renders h1', () => {
-    render(<Provider store={store}>
-        <TodosList />
-    </Provider>);
-    const header = screen.getByRole('heading', { name: 'Todos' })
-    expect(header).toBeInTheDocument();
-})
+// test('renders h1', () => {
+//     const { header } = setup();
+//     expect(header).toBeInTheDocument();
+// })
 
+// describe('addTodosInput', () => {
+//     test('should render input', () => {
+//         const { addTodoInput } = setup();
+//         expect(addTodoInput).toBeInTheDocument();
+//     });
+//     test('should be able to type in input', () => {
+//         const { addTodoInput } = setup();
+//         userEvent.type(addTodoInput, 'go to sleep')
+//         expect(addTodoInput).toHaveValue('go to sleep')
+//     });
+//     test('input should be empty when button is clicked', () => {
+//         const { addTodoInput, addTodoButton } = setup();
+//         userEvent.click(addTodoButton);
+//         expect(addTodoInput).toHaveValue('');
+//     })
+// })
 
-const setup = () => {
-    const utils = render(<Provider store={store}>
-        <TodosList />
-    </Provider>)
+// describe('Todo', () => {
+//     test('should render todoItem when button is clicked', () => {
+//         const { addTodo } = setup();
+//         addTodo(['some text']);
+//         expect(screen.getByText('some text', {selector: 'p'})).toBeInTheDocument;
+//     })
+//     test('todoItem should not be present in the document when delete button is clicked', () => {
+//         // const { addTodo } = setup();
+//         // addTodo(['todo to delete'])
+//         const deleteButton = screen.getByTestId('delete');
+//     })
+//     // test('should render n todoItems when button clicked n times', () => {
+//     //     const {addTodo} = setup();
+//     //     addTodo(['w','a','s']);
+//     //     expect(screen.getAllByTestId('todoEl')).toBe(3)
+//     // })
+//     test('todoItem should not be in todos when checkbox is clicked', async () => {
+//         // const { addTodo } = setup();
+//         // addTodo(['s'])
+//         // const checkBox = await screen.findByTestId('checkbox');
+//     })
+// })
+
+function renderTodoList() {
+    const utils = render(<Provider store={store}><TodosList/></Provider>)
     const addTodoInput = utils.getByPlaceholderText('write your task here...');
     const addTodoButton = utils.getByTestId('addTodoButton');
-    
+    const header = utils.getByRole('heading', { name: 'Todos' })
     const addTodo = (todos: string[]) => {
         todos.forEach(todo => {
             userEvent.type(addTodoInput, todo);
             userEvent.click(addTodoButton);
         })
     }
+
     return {
-        addTodoButton,
+        ...utils,
         addTodoInput,
-        addTodo,
-        ...utils
+        addTodoButton,
+        header,
+        addTodo
     }
 }
 
-describe('addTodosInput', () => {
-    test('should render input', () => {
-        const { addTodoInput } = setup();
-        expect(addTodoInput).toBeInTheDocument();
-    });
-    test('should be able to type in input', () => {
-        const { addTodoInput } = setup();
-        userEvent.type(addTodoInput, 'go to sleep')
-        expect(addTodoInput).toHaveValue('go to sleep')
-    });
-    test('input should be empty when button is clicked', () => {
-        const { addTodoInput, addTodoButton } = setup();
-        userEvent.click(addTodoButton);
-        expect(addTodoInput).toHaveValue('');
-    })
+
+test('should render header', () => {
+    const { header } = renderTodoList()
+    expect(header).toBeInTheDocument()
 })
 
-describe('Todo', () => {
-    // test('should render a child',  () => {
-    //     render(<Provider store={store}><TodosList/></Provider>);       
-    //     const addTodoInput = screen.getByPlaceholderText('write your task here...');
-    //     const addTodoButton = screen.getByTestId('addTodoButton');
-    //     userEvent.type(addTodoInput, 'some text');
-    //     userEvent.click(addTodoButton);
-    //     const todoEl = screen.getByTestId('todoEl');
-    //     expect(todoEl).toBeInTheDocument();
-    // })
-    // test('should render multiple components', () => {
-    //     const { addTodo } = setup();
-    //     addTodo(['', '', '']);
-    //     const pEls = screen.getAllByTestId('todoEl');
-    //     expect(pEls.length).toBe(3);
-    // }) // does not work
-    // test('should not be present when checkbox is clicked', () => {
-    //     const { addTodo } = setup();
-    //     addTodo(['some text']);
-    //     const checkBox = screen.getByTestId('checkbox');
-    //     userEvent.click(checkBox);
-    //     const el = screen.getByText('some text');
-    // })
+test('should render input', () => {
+    const { addTodoInput } = renderTodoList();
+    expect(addTodoInput).toBeInTheDocument();
 })
+
+test('should be able to type inside input', () => {
+    const { addTodoInput } = renderTodoList();
+    userEvent.type(addTodoInput, 'some text');
+    expect(addTodoInput).toHaveValue('some text');
+})
+
+test('input should be empty after addButton is clicked', () => {
+    const { addTodoInput, addTodoButton } = renderTodoList();
+    userEvent.type(addTodoInput, 'some text');
+    userEvent.click(addTodoButton);
+    expect(addTodoInput).toHaveValue('');
+})
+
+test('should render a todo item when addButton is clicked', () => {
+    const { addTodo } = renderTodoList();
+    addTodo(['render a todo']);
+    const addedTodoParagraph = screen.getByText('render a todo', {selector: 'p'})
+    expect(addedTodoParagraph).toBeInTheDocument();
+})
+
+test('should delete todo item when delete button is clicked', () => {
+   
+})
+
+
+
 

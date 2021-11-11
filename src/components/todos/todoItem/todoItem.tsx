@@ -27,7 +27,7 @@ const TodoItem: FC<ITodoItemProps> = (props) => {
             <div className={classes.todoItem__body}>
                 <input data-testid='checkbox' className={classes.todoItem__checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
                 <p className={classes.todoItem__text} >{props.text}</p>
-                <button className={classes.todoItem__deleteBtn} onClick={() => dispatch(deleteTodo(props.id))} >
+                <button data-testid='delete' className={classes.todoItem__deleteBtn} onClick={() => dispatch(deleteTodo(props.id))} >
                     <img src='/close.png' width='20px' height='20px' alt='delete' />
                 </button>
                 <button className={classes.todoItem__editBtn} onClick={handleEditButtonClick}>

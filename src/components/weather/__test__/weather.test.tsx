@@ -5,20 +5,20 @@ import Weather from '../weather';
 import store from '../../../store';
 
 describe('weather', () => {
-    test('should not have visible class', () => {
+    test('should not have visible class', async () => {
         render(<Provider store={store}>
             <Weather />
         </Provider>)
-        const weatherBox = screen.getByTestId('weatherBox');
+        const weatherBox = await screen.findByTestId('weatherBox');
         expect(weatherBox).not.toHaveClass('weatherCards_visible')
     })
-    test('should have visble class on click', () => {
+    test('should have visble class on click', async () => {
         render(<Provider store={store}>
             <Weather />
         </Provider>)
-        const weatherBox = screen.getByTestId('weatherBox');
-        const showButton = screen.getByRole('button');
+        const weatherBox = await screen.findByTestId('weatherBox');
+        const showButton = await screen.findByRole('button');
         userEvent.click(showButton);
-        expect(weatherBox).toHaveClass('weatherCards_visible')
+        expect(weatherBox).toHaveClass('weatherCards_visible');
     })
 })

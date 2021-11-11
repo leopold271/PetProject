@@ -2,7 +2,7 @@ import './App.scss';
 import TodosList from './components/todos/todos';
 import {
   BrowserRouter as Router,
-  Route,
+  Route, Redirect
 } from "react-router-dom";
 import Weather from './components/weather/weather';
 import PomodoroTimer from './components/pomodoroTimer/pomodoroTimer';
@@ -17,7 +17,8 @@ function App() {
       <Router>
         <SideBar />
         <Clock/>
-        <Route path='/home'>
+        <Route exact path='/home'>
+          <Redirect to='/home'/>
           <TodosList />
           <Weather />
           <PomodoroTimer />

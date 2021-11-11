@@ -25,7 +25,7 @@ const TodosList = () => {
     })
   
     const renderedTodos = todos.map(t => (
-        <div>
+        <div >
             <TodoItem id={t.id} text={t.todoText} />
         </div>
     ))
