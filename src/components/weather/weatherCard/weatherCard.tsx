@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { FC } from "react";
 import { IWeatherInfo } from '../weatherCard/weatherInterfaces';
 import classes from './weatherCard.module.scss'
@@ -9,10 +10,11 @@ interface Iprops {
 const WeatherCard: FC<Iprops> = ({ day }) => {
 
     const thisDay = day.dt_txt.split(' '[0])[0];
+    const formattedtThisDay = moment(thisDay).format('Do MMMM YYYY');
 
     return (
-        <div className={classes.weatherCard}>
-            <p className={classes.date}>{thisDay}</p>
+        <div data-testid='weather-card' className={classes.weatherCard}>
+            <p className={classes.date}>{formattedtThisDay}</p>
             <p>Temperature: <img src='./980873-200.png' />
                 {day.main.temp}</p>
             <p>Feels like: <img src='./3742528-200.png' />

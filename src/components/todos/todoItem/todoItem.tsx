@@ -30,7 +30,7 @@ const TodoItem: FC<ITodoItemProps> = (props) => {
                 <button data-testid='delete' className={classes.todoItem__deleteBtn} onClick={() => dispatch(deleteTodo(props.id))} >
                     <img src='/close.png' width='20px' height='20px' alt='delete' />
                 </button>
-                <button className={classes.todoItem__editBtn} onClick={handleEditButtonClick}>
+                <button data-testid='edit' className={classes.todoItem__editBtn} onClick={handleEditButtonClick}>
                     <img src='/icons8-edit-24.png' width='20px' height='20px' alt='edit' />
                 </button>
             </div>

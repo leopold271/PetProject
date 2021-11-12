@@ -33,17 +33,11 @@
     }
 }
 
-.todos__addButton {
-    border: none;
-    padding: 7px;
-    background-color: rgba(0, 128, 0, 0.356);
-    cursor: pointer;
-    margin-left: 3px;
-    border-radius: 10px;
-    &:hover {
-        background-color: rgba(0, 128, 0, 0.5);
-    }
+.todos__addButton, 
+.todos__deleteAllButton {
+    @include iconTodosBtn
 }
+
 
 .renderedTodos {
     width: 900px;
@@ -72,3 +66,4 @@
 .renderedDoneTodos__clearButton_active {
     display: inline-block;
 }
+

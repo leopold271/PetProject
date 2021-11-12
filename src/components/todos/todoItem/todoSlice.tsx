@@ -37,10 +37,13 @@ const TodoReducer = createSlice({
         },
         clearAllDoneTodos: (state) => {
             state.DoneTodoItems = []
+        },
+        deleteAllTodos: (state) => {
+            state.TodoItems = []
         }
     }
 });
 
-export const { addTodo, deleteTodo, editTodo, moveToDone, clearAllDoneTodos } = TodoReducer.actions;
+export const { addTodo, deleteTodo, editTodo, moveToDone, clearAllDoneTodos, deleteAllTodos } = TodoReducer.actions;
 
 export default TodoReducer.reducer;

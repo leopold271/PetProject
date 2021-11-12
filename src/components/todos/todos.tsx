@@ -3,7 +3,7 @@ import _ from 'lodash';
 import TodoItem from "./todoItem/todoItem";
 import DoneTodoItem from './todoItem/doneTodoItem'
 import { useAppSelector, useAppDispatch } from '../../appHooks';
-import { addTodo, clearAllDoneTodos } from './todoItem/todoSlice';
+import { addTodo, clearAllDoneTodos, deleteAllTodos } from './todoItem/todoSlice';
 import classes from './todos.module.scss';
 
 
@@ -26,7 +26,7 @@ const TodosList = () => {
   
     const renderedTodos = todos.map(t => (
         <div >
-            <TodoItem id={t.id} text={t.todoText} />
+            <TodoItem key={t.todoText} id={t.id} text={t.todoText} />
         </div>
     ))
 
@@ -59,6 +59,9 @@ const TodosList = () => {
                     placeholder='write your task here...'/>
                     <button data-testid='addTodoButton' className={classes.todos__addButton} onClick={handleClick} >
                         <img className={classes.todos__addButtonImage} src="icons8Add.png" alt="add" width='20px' />
+                    </button>
+                    <button data-testid='delete-all' className={classes.todos__deleteAllButton} onClick={() => dispatch(deleteAllTodos())}>
+                        <img className={classes.todos__deleteAllButtomImage} width='20px' src="bin.png" alt="deleteAll" />
                     </button>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import classes from './profile.module.scss'
 import Modal from '../modal/modal';
 import * as Yup from 'yup';
 import _ from 'lodash';
+import Media from './media/meida';
 
 const Profile = () => {
 
@@ -42,7 +43,6 @@ const Profile = () => {
         localStorage.setItem('email', formik.values.email);
         localStorage.setItem('nickName', formik.values.nickName);
     }
-
 
     return (
         <div>
@@ -90,8 +90,8 @@ const Profile = () => {
                     <button className={classes.profileInfo__button} onClick={() => setModalIsShown(true)}>edit</button>
                 </div>
             </div>
+            <Media/>
         </div>
-
     )
 }
 

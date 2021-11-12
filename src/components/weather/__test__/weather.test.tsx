@@ -4,21 +4,31 @@ import { Provider } from 'react-redux';
 import Weather from '../weather';
 import store from '../../../store';
 
-describe('weather', () => {
-    test('should not have visible class', async () => {
-        render(<Provider store={store}>
-            <Weather />
-        </Provider>)
-        const weatherBox = await screen.findByTestId('weatherBox');
-        expect(weatherBox).not.toHaveClass('weatherCards_visible')
-    })
-    test('should have visble class on click', async () => {
-        render(<Provider store={store}>
-            <Weather />
-        </Provider>)
-        const weatherBox = await screen.findByTestId('weatherBox');
-        const showButton = await screen.findByRole('button');
-        userEvent.click(showButton);
-        expect(weatherBox).toHaveClass('weatherCards_visible');
+function renderWeather() {
+   const utils = render(<Provider store={store}> <Weather /> </Provider>)
+   const weatherBox = utils.getByTestId('weatherBox');
+    return{
+        ...utils,
+        weatherBox
+    }
+}
+
+test('should not have visible class', () => {  
+    const {weatherBox} = renderWeather();
+    expect(weatherBox).not.toHaveClass('weatherCards_visible')
+})
+
+test('should have visble class on click',  () => {    
+    const {weatherBox} = renderWeather();
+    const showButton = screen.getByRole('button');
+    userEvent.click(showButton);
+    expect(weatherBox).toHaveClass('weatherCards_visible');
+})
+
+test('should render weatherCards', async () => {
+    const {weatherBox} = renderWeather();
+    const wetaherCards = await screen.findAllByTestId('weather-card');
+    wetaherCards.forEach(w => {
+        expect(w).toBeInTheDocument();
     })
 })

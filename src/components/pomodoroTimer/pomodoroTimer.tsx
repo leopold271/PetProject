@@ -38,6 +38,7 @@ const PomodoroTimer = () => {
                     // setMinutes(minutes);
                     setIsBreakTime(!isBreakTime);
                     setModalIsShown(!modalIsShown);
+
                 }
             } else {
                 // setSeconds(seconds - 1)
@@ -74,7 +75,6 @@ const PomodoroTimer = () => {
                 <div className={classes.mainTimer__timer}>
                     {timerMinutes}:{timerSeconds}
                 </div>
-                
             </div>
         </div>
     )
