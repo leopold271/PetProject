@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import classes from './profile.module.scss'
 import Modal from '../modal/modal';
 import * as Yup from 'yup';
-import _ from 'lodash';
 import Media from './media/meida';
 
 const Profile = () => {
