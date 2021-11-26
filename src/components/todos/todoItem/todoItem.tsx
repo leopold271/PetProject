@@ -23,18 +23,18 @@ const TodoItem: FC<ITodoItemProps> = (props) => {
     const dispatch = useAppDispatch();
 
     return (
-        <div data-testid='todoEl' className={classes.todoItem}>
+        <div data-cy='todoEl' className={classes.todoItem}>
             <div className={classes.todoItem__body}>
-                <input data-testid='checkbox' className={classes.todoItem__checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
-                <p className={classes.todoItem__text} >{props.text}</p>
-                <button data-testid='delete' className={classes.todoItem__deleteBtn} onClick={() => dispatch(deleteTodo(props.id))} >
+                <input data-cy='checkbox' className={classes.todoItem__checkbox} type="checkbox" onClick={() => dispatch(moveToDone(id))}/>
+                <p data-cy='todo-text' className={classes.todoItem__text} >{props.text}</p>
+                <button data-cy='delete' className={classes.todoItem__deleteBtn} onClick={() => dispatch(deleteTodo(props.id))} >
                     <img src='/close.png' width='20px' height='20px' alt='delete' />
                 </button>
-                <button data-testid='edit' className={classes.todoItem__editBtn} onClick={handleEditButtonClick}>
+                <button data-cy='edit' className={classes.todoItem__editBtn} onClick={handleEditButtonClick}>
                     <img src='/icons8-edit-24.png' width='20px' height='20px' alt='edit' />
                 </button>
             </div>
-            <div className={` ${classes.todoItem__editForm} ${editMode ? classes.todoItem__editFrom_active : ''}`}>
+            <div data-cy='edit-form' className={` ${classes.todoItem__editForm} ${editMode ? classes.todoItem__editFrom_active : ''}`}>
                 <textarea className={classes.todoItem__textarea} placeholder='edit here...' value={editedTodoText} onChange={(e) => setEditedTodoText(e.target.value)}></textarea>
             </div>
         </div>

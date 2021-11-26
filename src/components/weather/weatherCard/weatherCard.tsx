@@ -18,17 +18,17 @@ const WeatherCard: FC<IWeatherCardprops> = ({ temperature, feelsLike, humidity, 
 
     return (
         <div data-testid='weather-card' className={classes.weatherCard}>
-            <p className={classes.date}>{formattedtThisDay}</p>
-            <p>Temperature: <img src='./980873-200.png' />
+            <p data-cy='date' className={classes.date}>{formattedtThisDay}</p>
+            <p data-cy='temperature' >Temperature: <img src='./980873-200.png' />
                 {temperature}</p>
-            <p id='feels-like'>Feels like: <img src='./3742528-200.png' />
+            <p  data-cy='feels-like'>Feels like: <img src='./3742528-200.png' />
                 {feelsLike}</p>
-            <p>Humidity: <img src='./1957538-200.png' />
+            <p data-cy='humidity' >Humidity: <img src='./1957538-200.png' />
                 {humidity}</p>
-            <p>Pressure: <img className={classes.weatherCard_pressureImg} src='./1289313-200.png' />
+            <p data-cy='pressure'>Pressure: <img className={classes.weatherCard_pressureImg} src='./1289313-200.png' />
                 {pressure}</p>
         </div>
     )
 }
 
-export default WeatherCard;
+export default WeatherCard; 

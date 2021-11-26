@@ -51,16 +51,16 @@ const TodosList = () => {
     })
 
     return (
-        <div id='foo' className={classes.todos}>
+        <div className={classes.todos}>
             <div className={classes.todos__content}>
                 <h1 className={classes.todos__header}>Todos</h1>
                 <div className={classes.todos__enterings}>
-                    <input className={classes.todos__input} type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)} 
+                    <input data-cy='todo-input' className={classes.todos__input} type="text" value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)} 
                     placeholder='write your task here...'/>
-                    <button data-testid='addTodoButton' className={classes.todos__addButton} onClick={handleClick} >
+                    <button data-cy='addTodoButton' className={classes.todos__addButton} onClick={handleClick} >
                         <img className={classes.todos__addButtonImage} src="icons8Add.png" alt="add" width='20px' />
                     </button>
-                    <button data-testid='delete-all' className={classes.todos__deleteAllButton} onClick={() => dispatch(deleteAllTodos())}>
+                    <button data-cy='delete-all' className={classes.todos__deleteAllButton} onClick={() => dispatch(deleteAllTodos())}>
                         <img className={classes.todos__deleteAllButtomImage} width='20px' src="bin.png" alt="deleteAll" />
                     </button>
                 </div>
@@ -70,7 +70,7 @@ const TodosList = () => {
             </div>
             <div className={`${classes.renderedDoneTodos} ${isRenderedDoneTodosEmpty ? null : classes.renderedDoneTodos_withBorder}`}>
                 {renderedDoneTodos}
-                <button className={`${classes.renderedDoneTodos__clearButton} ${isBtnActive ? classes.renderedDoneTodos__clearButton_active : null}`} onClick={() => dispatch(clearAllDoneTodos())}>clear</button>
+                <button data-cy='delete-all-done' className={`${classes.renderedDoneTodos__clearButton} ${isBtnActive ? classes.renderedDoneTodos__clearButton_active : null}`} onClick={() => dispatch(clearAllDoneTodos())}>clear</button>
             </div>
         </div>
     )

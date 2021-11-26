@@ -1,7 +1,7 @@
-import { rest } from 'msw';
-import { IWeatherInfo } from '../components/weather/weatherCard/weatherInterfaces';
 
-const response: IWeatherInfo[] = [
+import React from 'react';
+import { IWeatherInfo } from '../../src/components/weather/weatherCard/weatherInterfaces';
+const staticResponse: IWeatherInfo[] = [
     {
         clouds: {
             all: 3
@@ -112,6 +112,45 @@ const response: IWeatherInfo[] = [
     }
 ]
 
-export const getFakeWeather = () => new Promise<IWeatherInfo[]>((resolve) => resolve(response));
+beforeEach(() => {
+    cy.visit('/home')
+})
 
-  
+describe('weather request with mocked response', () => {
+    it('should get weather info', () => {
+
+        cy.intercept('GET', 'https://api.openweathermap.org/data/2.5/forecast?q=Kiev&lang=ru&units=metric&APPID=f0958b216bf500191d719b09913aa283', staticResponse).as('getWeather')
+
+        cy.get('[data-cy=weather-button]')
+            .click()
+
+        cy.wait('@getWeather').its('response.body').should('have.length', 3)
+
+    })
+})
+
+describe('weather wrapper appearance', () => {
+
+    it('should be toggled hidden/shown on button click', () => {
+        cy.get('[data-cy=weather-box]')
+            .should('have.css', 'margin-right', '-250px')
+        cy.get('[data-cy=weather-button]')
+            .click()
+        cy.get('[data-cy=weather-box]')
+            .should('have.css', 'margin-right', '0px')
+    })
+})
+
+
+describe('real weather request', () => {
+    it('should send request and get correct response', () => {
+        cy.request('https://api.openweathermap.org/data/2.5/forecast?q=Kiev&lang=ru&units=metric&APPID=f0958b216bf500191d719b09913aa283')
+            .then((response) => {
+                expect(response.status).to.eq(200)
+                expect(response.body).to.have.property('city')
+                expect(response.body).to.have.property('list')
+                expect(response.body.list[0]).to.have.property('dt_txt')
+            })
+    })
+})
+

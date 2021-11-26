@@ -9,7 +9,7 @@ interface IdoneTodoItemProps {
 const DoneTodoItem = (props: IdoneTodoItemProps) => {
 
     return(
-        <div data-testid='doneTodoEl' className={classes.doneTodoItem}>
+        <div data-cy='done-todo' className={classes.doneTodoItem}>
             <p className={classes.doneTodoItems__text}>{props.text}</p>
         </div>
     )

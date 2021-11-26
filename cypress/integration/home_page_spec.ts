@@ -1,0 +1,91 @@
+import React from 'react';
+
+describe('The Home Page', () => {
+    it('successfully loads', () => {
+        cy.visit('/home')
+    })
+})
+
+describe('todos user interactions', () => {
+    it('can type in input', () => {
+        cy.visit('/home')
+        cy.get('[data-cy=todo-input]')
+            .type('todo 1')
+            .should('have.value', 'todo 1')
+    })
+    it('should add a todo item', () => {
+        cy.get('[data-cy=addTodoButton]')
+            .click()
+        cy.get('[data-cy=todo-text]')
+            .should('contain.text', 'todo 1')
+    })
+    it('should delete todo item on delete button click', () => {
+        cy.get('[data-cy=delete]')
+            .click()
+            .should('not.exist')
+    })
+    it('should be able to edit todo item', () => {
+        cy.get('[data-cy=todo-input]')
+            .type('todo to edit')
+        cy.get('[data-cy=addTodoButton]')
+            .click()
+        cy.get('[data-cy=edit]')
+            .click()
+        cy.get('textarea')
+            .click()
+            .type('{selectall} {backspace}edited')
+        cy.get('[data-cy=edit]')
+            .click()
+        cy.get('[data-cy=todo-text]')
+            .should('have.text', 'edited')
+    })
+    it('should be able to delete multiple todos when delete all button is clicked', () => {
+        for (let i = 0; i < 5; i++) {
+            cy.get('[data-cy=todo-input]')
+                .type('hep')
+            cy.get('[data-cy=addTodoButton]')
+                .click()
+        }
+        cy.get('[data-cy=delete-all]')
+            .click()
+        cy.get('[data-cy=todoEl]')
+            .should('not.exist')
+    })
+    it('should be able to move todo item to done todos', () => {
+        cy.get('[data-cy=todo-input]')
+            .type('todo to move')
+        cy.get('[data-cy=addTodoButton]')
+            .click()
+        cy.get('[data-cy=checkbox]')
+            .click()
+        cy.get('[data-cy=todoEl]')
+            .should('not.exist')
+        cy.get('[data-cy=done-todo]')
+            .should('have.text', 'todo to move')
+    })
+    it('should delete all done todo items on delete all button click', () => {
+        cy.get('[data-cy=todo-input]')
+            .type('hep')
+        cy.get('[data-cy=addTodoButton]')
+            .click()
+        cy.get('[data-cy=checkbox]')
+            .click()
+        cy.get('[data-cy=delete-all-done]')
+            .click()
+        cy.get('[data-cy=done-todo]')
+            .should('not.exist')
+    })
+    it('delete all done todos button should only appear if there is at least on item to delete', () => {
+        cy.get('[data-cy=delete-all-done]')
+            .should('not.be.visible')
+        cy.get('[data-cy=todo-input]')
+            .type('todo to test clear button appearance')
+        cy.get('[data-cy=addTodoButton]')
+            .click()
+        cy.get('[data-cy=checkbox]')
+            .click()
+        cy.get('[data-cy=delete-all-done]')
+            .should('be.visible')
+    })
+})
+
