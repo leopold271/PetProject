@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getWeather } from "./services";
+import { getWeather } from "../../services";
 import { useAppSelector, useAppDispatch } from '../../appHooks';
 import WeatherCard from './weatherCard/weatherCard';
 import classes from './weather.module.scss';

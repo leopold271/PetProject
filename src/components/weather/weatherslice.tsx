@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { WeatherState } from './weatherCard/weatherInterfaces';
-import { getWeather } from './services';
+import { getWeather } from '../../services';
 
 const initialState: WeatherState = {
     weatherInfo: []

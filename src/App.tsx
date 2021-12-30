@@ -9,9 +9,20 @@ import PomodoroTimer from './components/pomodoroTimer/pomodoroTimer';
 import SideBar from './components/sideBar/sideBar';
 import EditProfile from './components/profile/profile';
 import Clock from './components/Clock/clock';
+import Login from './components/Login/login';
+import useToken from './components/Login/useToken';
 
 
 function App() {
+
+  const {getToken, setToken } = useToken();
+
+  const token = getToken()
+  
+  if(!token) {
+    return <Login setToken={setToken}/>
+  }
+
   return (
     <main className='body'>
       <Router>
@@ -23,7 +34,7 @@ function App() {
           <Weather />
           <PomodoroTimer />
         </Route>
-        <Route path='/profile'>
+        <Route exact path='/profile'>
           <EditProfile />
         </Route>
       </Router>

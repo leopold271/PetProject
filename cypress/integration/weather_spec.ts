@@ -141,7 +141,6 @@ describe('weather wrapper appearance', () => {
     })
 })
 
-
 describe('real weather request', () => {
     it('should send request and get correct response', () => {
         cy.request('https://api.openweathermap.org/data/2.5/forecast?q=Kiev&lang=ru&units=metric&APPID=f0958b216bf500191d719b09913aa283')
